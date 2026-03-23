@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <!-- 环境配置 -->
+    <!-- 导入外部配置db.properties-->
+    <properties resource="db.properties"/>
+
+    <settings>
+        <!--开启全局缓存,默认true-->
+        <setting name="cacheEnabled" value="true"/>
+
+        <!--开启全局懒加载，默认是false-->
+        <setting name="lazyLoadingEnabled" value="true"></setting>
+
+        <!--开启关联属性的懒加载，默认是false-->
+        <setting name="aggressiveLazyLoading" value="true"></setting>
+
+        <!--开启驼峰映射-->
+        <setting name="mapUnderscoreToCamelCase" value="true"></setting>
+    </settings>
+
+    <!-- 2. 配置类型别名（核心！替换成你的Student类包路径） -->
+    <typeAliases>
+        <!-- 方式1：包扫描（推荐），
+        <package name="com.itheima.pojo"/>
+        自动识别包下所有类的别名 -->
+        <!-- 方式2：单个配置（备用，二选一）-->
+        <typeAlias type="com.itheima.pojo.Student" alias="Student"/>
+
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <!-- 数据库连接相关配置 ,db.properties文件中的内容-->
+            <dataSource type="POOLED">
+                <property name="driver" value="${mysql.driver}"/>
+                <property name="url" value="${mysql.url}"/>
+                <property name="username" value="${mysql.username}"/>
+                <property name="password" value="${mysql.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+
+
+    <mappers>
+         <mapper resource="mapper/StudentMapper.xml"/>
+    </mappers>
+
+</configuration>
